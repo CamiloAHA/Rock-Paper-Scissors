@@ -13,7 +13,7 @@ function game() {
     let gameResult;
     for (let a = 0; a < 5; a++) {
         let selection = prompt("Choose your fighter (Rock, paper or scissors)");
-        let result = playRound(selection, computerPlay());
+        let result = playRound(selection.toLowerCase(), computerPlay());
         console.log(result);
         if (result == "Draw") {
             drawCount++;
@@ -28,24 +28,18 @@ function game() {
     }
 
     if (winCount == 3 | winCount > loseCount) {
-        gameResult = `You Win the Game!
-Results
-Wins: ${winCount}    Loses: ${loseCount}    Draws: ${drawCount}`;
+        gameResult = `\n You Win the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
     } else if (loseCount == 3 | loseCount > winCount) {
-        gameResult = `You Lose the Game!
-Results
-Wins: ${winCount}    Loses: ${loseCount}    Draws: ${drawCount}`;
+        gameResult = `\n You Lose the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
     } else {
-        gameResult = `You Draw the Game!
-Results
-Wins: ${winCount}    Loses: ${loseCount}    Draws: ${drawCount}`;
+        gameResult = `\n You Draw the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
     }
     return gameResult;
 }
 
 function playRound(playerSelection, computerSelection) {
     let result;
-    if (playerSelection == 0) {
+    if (playerSelection == "rock") {
         if (computerSelection == 1) {
             result = "You Lose! Paper beats Rock";
         } else if (computerSelection == 2) {
@@ -53,7 +47,7 @@ function playRound(playerSelection, computerSelection) {
         } else {
             result = "Draw";
         }
-    } else if (playerSelection == 1) {
+    } else if (playerSelection == "paper") {
         if (computerSelection == 0) {
             result = "You Win! Paper beats Rock";
         } else if (computerSelection == 2) {
