@@ -6,11 +6,41 @@ function computerPlay() {
 }
 
 function game() {
-    alert("Welcome to the game, will be max 5 rounds, best of three");
+    alert("Welcome to the game, will be 5 rounds or best of three \n Good Luck!");
+    let drawCount = 0
+        , winCount = 0
+        , loseCount = 0;
+    let gameResult;
     for (let a = 0; a < 5; a++) {
         let selection = prompt("Choose your fighter (Rock, paper or scissors)");
-        console.log(playRound(selection, computerPlay()));
+        let result = playRound(selection, computerPlay());
+        console.log(result);
+        if (result == "Draw") {
+            drawCount++;
+        } else if (result.slice(0, 8) == "You Win!") {
+            winCount++;
+        } else {
+            loseCount++;
+        }
+        if (winCount == 3 | loseCount == 3) {
+            break;
+        }
     }
+
+    if (winCount == 3 | winCount > loseCount) {
+        gameResult = `You Win the Game!
+Results
+Wins: ${winCount}    Loses: ${loseCount}    Draws: ${drawCount}`;
+    } else if (loseCount == 3 | loseCount > winCount) {
+        gameResult = `You Lose the Game!
+Results
+Wins: ${winCount}    Loses: ${loseCount}    Draws: ${drawCount}`;
+    } else {
+        gameResult = `You Draw the Game!
+Results
+Wins: ${winCount}    Loses: ${loseCount}    Draws: ${drawCount}`;
+    }
+    return gameResult;
 }
 
 function playRound(playerSelection, computerSelection) {
