@@ -1,8 +1,8 @@
 //Rock=0 Paper=1 Scissors=2
 
 function computerPlay() {
-    let computerSelection = Math.random() * 3 - 1e-9;
-    return Math.floor(computerSelection);
+    let computerSelection = Math.random() * 3; 
+    return Math.floor(computerSelection); //Select floor value between 0 and 2.99...
 }
 
 function game() {
@@ -22,6 +22,7 @@ function game() {
         } else {
             loseCount++;
         }
+        console.log(`Human: ${winCount}, WebPage: ${loseCount}`)
         if (winCount == 3 | loseCount == 3) {
             break;
         }
