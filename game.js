@@ -5,29 +5,56 @@ function computerPlay() {
     return Math.floor(computerSelection); //Select floor value between 0 and 2.99...
 }
 
-function game(result) {
+function game() {
     alert("Welcome to the game, will be 5 rounds or best of three \n Good Luck!");
     let drawCount = 0
         , winCount = 0
         , loseCount = 0;
-    let gameResult;
+    let result
+        , gameResult;
 
-    if (result == "Draw") {
-        drawCount++;
-    } else if (result.slice(0, 8) == "You Win!") {
-        winCount++;
-    } else {
-        loseCount++;
+    const content = document.querySelector('.content')
+    const results = document.createElement('h2')
+    const score = document.createElement('h2')
+
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.addEventListener('click', scoreDisplay);
+    });
+
+    function scoreDisplay() {
+        results.textContent = playRound(this.id)
+        if (results.textContent == "Draw") {
+            drawCount++;
+        } else if (results.textContent.slice(0, 8) == "You Win!") {
+            winCount++;
+        } else {
+            loseCount++;
+        }
+        score.textContent = currentResult()
+
+        content.appendChild(results)
+        content.appendChild(score)
+
+        if (score.textContent.slice(0, 3) == "You") deleteEvents();
     }
 
-    if (winCount == 3 | winCount > loseCount) {
-        gameResult = `\n You Win the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
-    } else if (loseCount == 3 | loseCount > winCount) {
-        gameResult = `\n You Lose the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
-    } else {
-        gameResult = `\n You Draw the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
+    function deleteEvents() {
+        buttons.forEach(button => {
+            button.removeEventListener('click', scoreDisplay)
+        })
     }
-    return gameResult;
+
+    function currentResult() {
+        if (winCount === 5) {
+            gameResult = `You Win the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
+        } else if (loseCount === 5) {
+            gameResult = `You Lose the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
+        } else {
+            gameResult = `Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `
+        }
+        return gameResult;
+    }
 }
 
 function playRound(playerSelection) {
@@ -61,13 +88,4 @@ function playRound(playerSelection) {
     return result;
 }
 
-const buttons = document.querySelectorAll('button');
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        results.textContent = playRound(button.id)
-        content.appendChild(results)
-    });
-});
-
-const content = document.querySelector('.content')
-const results = document.createElement('div')
+game()
