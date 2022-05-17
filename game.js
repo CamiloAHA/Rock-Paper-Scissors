@@ -6,7 +6,6 @@ function computerPlay() {
 }
 
 function game() {
-    alert("Welcome to the game, will be 5 rounds or best of three \n Good Luck!");
     let drawCount = 0
         , winCount = 0
         , loseCount = 0;
@@ -16,6 +15,8 @@ function game() {
     const content = document.querySelector('.content')
     const results = document.createElement('h2')
     const score = document.createElement('h2')
+    score.setAttribute('style', 'white-space: pre;');
+
 
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
@@ -47,11 +48,11 @@ function game() {
 
     function currentResult() {
         if (winCount === 5) {
-            gameResult = `You Win the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
+            gameResult = `You Win the Game!\r\n Results =  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n`;
         } else if (loseCount === 5) {
-            gameResult = `You Lose the Game!\n Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `;
+            gameResult = `You Lose the Game!\r\n Results =  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n`;
         } else {
-            gameResult = `Results=  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} \n `
+            gameResult = `Results =  Wins: ${winCount}  Loses: ${loseCount}  Draws: ${drawCount} `
         }
         return gameResult;
     }
